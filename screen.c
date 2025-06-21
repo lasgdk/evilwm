@@ -152,7 +152,7 @@ void screen_init(struct screen *s) {
 		X_ATOM(_NET_FRAME_EXTENTS),
 	};
 
-	unsigned long num_desktops = option.vdesks;
+	unsigned long num_desktops = option.vdeskcolumns * option.vdeskrows;
 	unsigned long vdesk = s->vdesk;
 	unsigned long pid = getpid();
 

@@ -23,8 +23,9 @@ struct monitor;
 // Virtual desktop macros
 #define VDESK_NONE  (0xfffffffe)
 #define VDESK_FIXED (0xffffffff)
-#define VDESK_MAX   (option.vdesks - 1)
-#define valid_vdesk(v) ((v) == VDESK_FIXED || (v) < option.vdesks)
+#define VDESK_MAX_COL   (option.vdeskcolumns - 1)
+#define VDESK_MAX_ROW   (option.vdeskrows - 1)
+#define valid_vdesk(v) ((v) == VDESK_FIXED || (v) < option.vdeskcolumns * option.vdeskrows)
 
 struct client {
 	Window window;  // actual application window

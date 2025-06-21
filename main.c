@@ -55,7 +55,9 @@ static void set_app_fixed(void);
 static struct xconfig_option evilwm_options[] = {
 	{ XCONFIG_STRING,   "fn",           { .s = &option.font } },
 	{ XCONFIG_STRING,   "display",      { .s = &option.display } },
-	{ XCONFIG_UINT,     "numvdesks",    { .u = &option.vdesks } },
+	{ XCONFIG_UINT,     "numvdesks",    { .u = &option.vdeskcolumns } },
+	{ XCONFIG_UINT,     "vdeskcolumns", { .u = &option.vdeskcolumns } },
+	{ XCONFIG_UINT,     "vdeskrows",    { .u = &option.vdeskrows } },
 	{ XCONFIG_STRING,   "fg",           { .s = &option.fg } },
 	{ XCONFIG_STRING,   "bg",           { .s = &option.bg } },
 	{ XCONFIG_STRING,   "fc",           { .s = &option.fc } },
@@ -98,7 +100,9 @@ static void helptext(void) {
 "  --bw PIXELS         window border width [" xstr(DEF_BW) "]\n"
 "  --snap PIXELS       snap distance when dragging windows [0; disabled]\n"
 "  --wholescreen       ignore monitor geometries when maximising\n"
-"  --numvdesks N       total number of virtual desktops [8]\n"
+"  --numvdesks N       see --vdeskcolumns\n"
+"  --vdeskcolumns N    number of columns of virtual desktops [8]\n"
+"  --vdeskrows N       number of rows of virtual desktops [1]\n"
 #ifdef SOLIDDRAG
 "  --nosoliddrag       draw outline when moving or resizing\n"
 #endif
@@ -142,7 +146,8 @@ static const char *default_options[] = {
 	"bg " DEF_BG,
 	"bw " xstr(DEF_BW),
 	"fc " DEF_FC,
-	"numvdesks 8",
+	"vdeskcolumns 8",
+	"vdeskrows 1",
 };
 #define NUM_DEFAULT_OPTIONS (sizeof(default_options)/sizeof(default_options[0]))
 

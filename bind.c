@@ -178,8 +178,10 @@ static struct {
 	{ "mask1+7",                "vdesk,6" },
 	{ "mask1+8",                "vdesk,7" },
 	{ "mask1+a",                "vdesk,toggle" },
-	{ "mask1+Left",             "vdesk,relative+down" },
-	{ "mask1+Right",            "vdesk,relative+up" },
+	{ "mask1+Left",             "vdesk,relative+left" },
+	{ "mask1+Right",            "vdesk,relative+right" },
+	{ "mask1+Up",               "vdesk,relative+up" },
+	{ "mask1+Down",             "vdesk,relative+down" },
 
 	// Screen misc
 	{ "mask1+d",                "dock,toggle" },

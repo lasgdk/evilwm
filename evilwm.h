@@ -32,8 +32,9 @@ struct options {
 	// Border width
 	int bw;
 
-	// Number of virtual desktops
-	unsigned vdesks;
+	// Number of rows and columns of virtual desktops
+	unsigned vdeskrows;
+	unsigned vdeskcolumns;
 
 	// Snap to border flag
 	int snap;

@@ -250,10 +250,9 @@ int main(int argc, char *argv[]) {
 		while (applications) {
 			struct application *app = applications->data;
 			applications = list_delete(applications, app);
-			if (app->res_name)
-				free(app->res_name);
-			if (app->res_class)
-				free(app->res_class);
+			free(app->res_name);
+			free(app->res_class);
+			free(app->vdesk);
 			free(app);
 		}
 
@@ -299,7 +298,7 @@ static void set_app(const char *arg) {
 	new->res_name = new->res_class = NULL;
 	new->geometry_mask = 0;
 	new->is_dock = 0;
-	new->vdesk = VDESK_NONE;
+	new->vdesk = NULL;
 	if ((tmp = strchr(arg, '/'))) {
 		*(tmp++) = 0;
 	}
@@ -328,17 +327,18 @@ static void set_app_dock(void) {
 }
 
 static void set_app_vdesk(const char *arg) {
-	unsigned v = strtoul(arg, NULL, 0);
-	if (applications && valid_vdesk(v)) {
+	if (applications) {
 		struct application *app = applications->data;
-		app->vdesk = v;
+		free(app->vdesk);
+		app->vdesk = xstrdup(arg);
 	}
 }
 
 static void set_app_fixed(void) {
 	if (applications) {
 		struct application *app = applications->data;
-		app->vdesk = VDESK_FIXED;
+		free(app->vdesk);
+		app->vdesk = xstrdup("F");  // magic value
 	}
 }
 

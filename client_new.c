@@ -1,5 +1,5 @@
 /* evilwm - minimalist window manager for X11
- * Copyright (C) 1999-2022 Ciaran Anscomb <evilwm@6809.org.uk>
+ * Copyright (C) 1999-2025 Ciaran Anscomb <evilwm@6809.org.uk>
  * see README for license and other details. */
 
 // Client management: manage new client.
@@ -169,9 +169,34 @@ void client_manage_new(Window w, struct screen *s) {
 				if (a->is_dock)
 					c->is_dock = 1;
 
-				// Force app to specific vdesk?
-				if (a->vdesk != VDESK_NONE)
-					c->vdesk = a->vdesk;
+				if (a->vdesk && *(a->vdesk) == 'F') {
+					// Fix app
+					c->vdesk = VDESK_FIXED;
+				} else if (a->vdesk) {
+					// Force app to specific vdesk
+					char *next = NULL;
+					long col = strtol(a->vdesk, &next, 10);
+					long row = 0;
+					if (col < 0)
+						col = 0;
+					if (next && *next && strchr(",+", *next)) {
+						// X,Y format
+						row = strtol(next+1, NULL, 10);
+						if (col > VDESK_MAX_COL)
+							col = VDESK_MAX_COL;
+						if (row < 0)
+							row = 0;
+						if (row > VDESK_MAX_ROW)
+							row = VDESK_MAX_ROW;
+						c->vdesk = row * option.vdeskcolumns + col;
+					} else {
+						// Absolute vdesk number
+						if (col >= option.vdeskcolumns * option.vdeskrows) {
+							col = (option.vdeskcolumns * option.vdeskrows) - 1;
+						}
+						c->vdesk = col;
+					}
+				}
 			}
 		}
 		XFree(class->res_name);

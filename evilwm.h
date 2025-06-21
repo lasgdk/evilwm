@@ -70,7 +70,7 @@ struct application {
 	int x, y;
 	unsigned width, height;
 	int is_dock;
-	unsigned vdesk;
+	char *vdesk;
 };
 
 extern struct list *applications;

@@ -1,5 +1,5 @@
 /* evilwm - minimalist window manager for X11
- * Copyright (C) 1999-2022 Ciaran Anscomb <evilwm@6809.org.uk>
+ * Copyright (C) 1999-2025 Ciaran Anscomb <evilwm@6809.org.uk>
  * see README for license and other details. */
 
 // main() function parses options and kicks off the main event loop.
@@ -45,6 +45,7 @@ unsigned numlockmask = 0;
 
 struct list *applications = NULL;
 
+static void set_numvdesks(const char *arg);
 static void set_bind(const char *arg);
 static void set_app(const char *arg);
 static void set_app_geometry(const char *arg);
@@ -55,7 +56,7 @@ static void set_app_fixed(void);
 static struct xconfig_option evilwm_options[] = {
 	{ XCONFIG_STRING,   "fn",           { .s = &option.font } },
 	{ XCONFIG_STRING,   "display",      { .s = &option.display } },
-	{ XCONFIG_UINT,     "numvdesks",    { .u = &option.vdeskcolumns } },
+	{ XCONFIG_CALL_1,   "numvdesks",    { .c1 = &set_numvdesks } },
 	{ XCONFIG_UINT,     "vdeskcolumns", { .u = &option.vdeskcolumns } },
 	{ XCONFIG_UINT,     "vdeskrows",    { .u = &option.vdeskrows } },
 	{ XCONFIG_STRING,   "fg",           { .s = &option.fg } },
@@ -274,6 +275,21 @@ int main(int argc, char *argv[]) {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // Option parsing callbacks
+
+static void set_numvdesks(const char *arg) {
+	char *next = NULL;
+	option.vdeskcolumns = strtol(arg, &next, 10);
+	option.vdeskrows = 1;
+	if (next && *next && strchr("xX*,", *next)) {
+		option.vdeskrows = strtol(next+1, NULL, 10);;
+	}
+	if (option.vdeskcolumns < 1) {
+		option.vdeskcolumns = 1;
+	}
+	if (option.vdeskrows < 1) {
+		option.vdeskrows = 1;
+	}
+}
 
 static void set_bind(const char *arg) {
 	char *argdup = xstrdup(arg);

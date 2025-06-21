@@ -1,5 +1,5 @@
 /* evilwm - minimalist window manager for X11
- * Copyright (C) 1999-2022 Ciaran Anscomb <evilwm@6809.org.uk>
+ * Copyright (C) 1999-2025 Ciaran Anscomb <evilwm@6809.org.uk>
  * see README for license and other details. */
 
 // Bindable functions
@@ -233,12 +233,12 @@ void func_vdesk(void *sptr, XEvent *e, unsigned flags) {
 				}
 			}
 			if (flags & FL_UP) {
-				if (current_screen->vdesk / option.vdeskrows > 0) {
+				if (current_screen->vdesk / option.vdeskcolumns > 0) {
 					switch_vdesk(current_screen, current_screen->vdesk - option.vdeskcolumns);
 				}
 			}
 			if (flags & FL_DOWN) {
-				if (current_screen->vdesk / option.vdeskrows < VDESK_MAX_ROW) {
+				if (current_screen->vdesk / option.vdeskcolumns < VDESK_MAX_ROW) {
 					switch_vdesk(current_screen, current_screen->vdesk + option.vdeskcolumns);
 				}
 			}

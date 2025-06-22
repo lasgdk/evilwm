@@ -49,6 +49,7 @@ static void set_numvdesks(const char *arg);
 static void set_bind(const char *arg);
 static void set_app(const char *arg);
 static void set_app_geometry(const char *arg);
+static void set_app_ignore_position(void);
 static void set_app_dock(void);
 static void set_app_vdesk(const char *arg);
 static void set_app_fixed(void);
@@ -71,6 +72,7 @@ static struct xconfig_option evilwm_options[] = {
 	{ XCONFIG_CALL_1,   "app",          { .c1 = &set_app } },
 	{ XCONFIG_CALL_1,   "geometry",     { .c1 = &set_app_geometry } },
 	{ XCONFIG_CALL_1,   "g",            { .c1 = &set_app_geometry } },
+	{ XCONFIG_CALL_1,   "ignore-position", { .c0 = &set_app_ignore_position } },
 	{ XCONFIG_CALL_0,   "dock",         { .c0 = &set_app_dock } },
 	{ XCONFIG_CALL_1,   "vdesk",        { .c1 = &set_app_vdesk } },
 	{ XCONFIG_CALL_1,   "v",            { .c1 = &set_app_vdesk } },
@@ -109,11 +111,12 @@ static void helptext(void) {
 "  --bind CTL[=FUNC]   bind (or unbind) input to window manager function\n"
 
 "\n Application matching options:\n"
-"  --app NAME/CLASS      match application by instance name & class\n"
-"    -g, --geometry GEOM   apply X geometry to matched application\n"
-"        --dock            treat matched app as a dock\n"
-"    -v, --vdesk VDESK     move app to numbered vdesk (indexed from 0)\n"
-"    -f, --fixed           matched app should start fixed\n"
+"  --app NAME/CLASS        match application by instance name & class\n"
+"    -g, --geometry GEOM     apply X geometry to matched application\n"
+"        --ignore-position   ignore user-specified position for app\n"
+"        --dock              treat matched app as a dock\n"
+"    -v, --vdesk VDESK       move app to numbered vdesk (indexed from 0)\n"
+"    -f, --fixed             matched app should start fixed\n"
 
 "\n Other options:\n"
 "  -h, --help      display this help and exit\n"
@@ -297,6 +300,7 @@ static void set_app(const char *arg) {
 	char *tmp;
 	new->res_name = new->res_class = NULL;
 	new->geometry_mask = 0;
+	new->ignore_position = 0;
 	new->is_dock = 0;
 	new->vdesk = NULL;
 	if ((tmp = strchr(arg, '/'))) {
@@ -316,6 +320,13 @@ static void set_app_geometry(const char *arg) {
 		struct application *app = applications->data;
 		app->geometry_mask = XParseGeometry(arg,
 				&app->x, &app->y, &app->width, &app->height);
+	}
+}
+
+static void set_app_ignore_position(void) {
+	if (applications) {
+		struct application *app = applications->data;
+		app->ignore_position = 1;
 	}
 }
 

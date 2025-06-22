@@ -149,6 +149,9 @@ Subsequent \f(CB\-\-geometry\fR, \f(CB\-\-dock\fR, \f(CB\-\-vdesk\fR and \f(CB\-
 \f(CB\-g\fR, \f(CB\-\-geometry\fR \fIgeometry\fR
 apply a geometry (using a standard X geometry string) to applications matching the last \f(CB\-\-app\fR.
 .TP
+\f(CB\-\-ignore\-position\fR
+ignores the user-specified position for a matched application. Useful for some applications which abuse these hints to centre themselves without the user asking for it.
+.TP
 \f(CB\-\-dock\fR
 specify that application should be considered to be a dock, even if it lacks the appropriate property.
 .TP
@@ -223,10 +226,10 @@ Switch one virtual desktop to the left.
 Right
 Switch one virtual desktop to the right.
 .TP
-Left
+Up
 Switch one virtual desktop up (if more than one row was specified).
 .TP
-Right
+Down
 Switch one virtual desktop down (if more than one row was specified).
 .TP
 A

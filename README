@@ -95,12 +95,20 @@ OPTIONS
               apply  a  geometry  (using  a  standard  X  geometry  string)  to
               applications matching the last --app.
 
+       --ignore-position
+              ignores  the  user-specified  position for a matched application.
+              Useful for some applications which abuse these  hints  to  centre
+              themselves without the user asking for it.
+
        --dock specify  that application should be considered to be a dock, even
               if it lacks the appropriate property.
 
-       -v, --vdesk vdesk
+       -v, --vdesk column[,row]
               specify a default virtual desktop for applications  matching  the
-              last --app. Note that virtual desktops are numbered from zero.
+              last  --app. If row is not specified, column may instead refer to
+              an absolute virtual desktop number (ignoring layout).  Note  that
+              column, row and absolute virtual desktop numbers are counted from
+              zero.
 
        -f, --fixed
               specify that application is to start with a fixed client window.
@@ -175,10 +183,10 @@ USAGE
 
        Right  Switch one virtual desktop to the right.
 
-       Left   Switch  one  virtual  desktop  up  (if  more  than  one  row  was
+       Up     Switch  one  virtual  desktop  up  (if  more  than  one  row  was
               specified).
 
-       Right  Switch  one  virtual  desktop  down  (if  more  than  one row was
+       Down   Switch  one  virtual  desktop  down  (if  more  than  one row was
               specified).
 
        A      Switch to the previously selected virtual desktop.

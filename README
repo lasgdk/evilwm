@@ -100,6 +100,9 @@ OPTIONS
               Useful for some applications which abuse these  hints  to  centre
               themselves without the user asking for it.
 
+       --ignore-border
+              ignores the application-specified border width and use the default.
+
        --dock specify  that application should be considered to be a dock, even
               if it lacks the appropriate property.
 
@@ -348,4 +351,4 @@ AEWM LICENCE
 SEE ALSO
        xterm (1), xprop (1)
 
-evilwm-1.4                         June 2025                          evilwm(1)
+evilwm-1.4                       December 2025                        evilwm(1)

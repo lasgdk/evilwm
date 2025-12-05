@@ -50,6 +50,7 @@ static void set_bind(const char *arg);
 static void set_app(const char *arg);
 static void set_app_geometry(const char *arg);
 static void set_app_ignore_position(void);
+static void set_app_ignore_border(void);
 static void set_app_dock(void);
 static void set_app_vdesk(const char *arg);
 static void set_app_fixed(void);
@@ -73,6 +74,7 @@ static struct xconfig_option evilwm_options[] = {
 	{ XCONFIG_CALL_1,   "geometry",     { .c1 = &set_app_geometry } },
 	{ XCONFIG_CALL_1,   "g",            { .c1 = &set_app_geometry } },
 	{ XCONFIG_CALL_1,   "ignore-position", { .c0 = &set_app_ignore_position } },
+	{ XCONFIG_CALL_1,   "ignore-border", { .c0 = &set_app_ignore_border } },
 	{ XCONFIG_CALL_0,   "dock",         { .c0 = &set_app_dock } },
 	{ XCONFIG_CALL_1,   "vdesk",        { .c1 = &set_app_vdesk } },
 	{ XCONFIG_CALL_1,   "v",            { .c1 = &set_app_vdesk } },
@@ -98,7 +100,7 @@ static void helptext(void) {
 "  --fg COLOUR         colour of active window frames [" DEF_FG "]\n"
 "  --fc COLOUR         colour of fixed window frames [" DEF_FC "]\n"
 "  --bg COLOUR         colour of inactive window frames [" DEF_BG "]\n"
-"  --bw PIXELS         window border width [" xstr(DEF_BW) "]\n"
+"  --bw PIXELS         default window border width [" xstr(DEF_BW) "]\n"
 "  --snap PIXELS       snap distance when dragging windows [0; disabled]\n"
 "  --wholescreen       ignore monitor geometries when maximising\n"
 "  --numvdesks C[xR]   logical virtual desktop geometry (columns x rows)\n"
@@ -114,6 +116,7 @@ static void helptext(void) {
 "  --app NAME/CLASS        match application by instance name & class\n"
 "    -g, --geometry GEOM     apply X geometry to matched application\n"
 "        --ignore-position   ignore user-specified position for app\n"
+"        --ignore-border     ignore application-specified border width\n"
 "        --dock              treat matched app as a dock\n"
 "    -v, --vdesk VDESK       move app to numbered vdesk (indexed from 0)\n"
 "    -f, --fixed             matched app should start fixed\n"
@@ -327,6 +330,13 @@ static void set_app_ignore_position(void) {
 	if (applications) {
 		struct application *app = applications->data;
 		app->ignore_position = 1;
+	}
+}
+
+static void set_app_ignore_border(void) {
+	if (applications) {
+		struct application *app = applications->data;
+		app->ignore_border = 1;
 	}
 }
 

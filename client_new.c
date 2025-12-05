@@ -31,7 +31,7 @@
 #include "screen.h"
 #include "util.h"
 
-static void init_geometry(struct client *c, _Bool ignore_position);
+static void init_geometry(struct client *c, _Bool ignore_position, _Bool ignore_border);
 static void reparent(struct client *c);
 
 // client_manage_new is called when a map request event for an unmanaged window
@@ -128,7 +128,7 @@ void client_manage_new(Window w, struct screen *s) {
 	}
 
 	update_window_type_flags(c, window_type);
-	init_geometry(c, app ? app->ignore_position : 0);
+	init_geometry(c, app ? app->ignore_position : 0, app ? app->ignore_border : 0);
 
 #ifdef DEBUG
 	{
@@ -246,12 +246,12 @@ void client_manage_new(Window w, struct screen *s) {
 
 // Fetches various hints to determine a window's initial geometry.
 
-static void init_geometry(struct client *c, _Bool ignore_position) {
+static void init_geometry(struct client *c, _Bool ignore_position, _Bool ignore_border) {
 	unsigned long nitems;
 	XWindowAttributes attr;
 
 	// Normal border size from MWM hints
-	c->normal_border = window_normal_border(c->window);
+	c->normal_border = ignore_border ? option.bw : window_normal_border(c->window);
 
 	// Possible get a value for initial virtual desktop from EWMH hint
 	unsigned long *lprop;

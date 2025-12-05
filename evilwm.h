@@ -68,6 +68,7 @@ struct application {
 	char *res_class;
 	int geometry_mask;
 	_Bool ignore_position;
+	_Bool ignore_border;
 	int x, y;
 	unsigned width, height;
 	int is_dock;

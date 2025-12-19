@@ -1,3 +1,5 @@
+Version 1.5, Fri Dec 19 2025
+
   * Fix compilation with SOLIDDRAG undefined [jake]
   * Allow specifying a matrix for vdesk organisation [Stefan Uhl]
   * Allow specifying virtual desktop for application in X,Y format.

@@ -101,15 +101,16 @@ OPTIONS
               themselves without the user asking for it.
 
        --ignore-border
-              ignores the application-specified border width and use the default.
+              ignores  the  application-specified  border  width  and  use  the
+              default.
 
-       --dock specify  that application should be considered to be a dock, even
+       --dock specify that application should be considered to be a dock,  even
               if it lacks the appropriate property.
 
        -v, --vdesk column[,row]
-              specify a default virtual desktop for applications  matching  the
-              last  --app. If row is not specified, column may instead refer to
-              an absolute virtual desktop number (ignoring layout).  Note  that
+              specify  a  default virtual desktop for applications matching the
+              last --app. If row is not specified, column may instead refer  to
+              an  absolute  virtual desktop number (ignoring layout). Note that
               column, row and absolute virtual desktop numbers are counted from
               zero.
 
@@ -122,19 +123,19 @@ OPTIONS
        -V, --version
               show program version
 
-       evilwm  will  also  read  options,  one  per  line,  from  a file called
-       .evilwmrc  in  the  user's  home  directory.   Options   listed   in   a
-       configuration  file  should omit the leading dash(es). Options specified
+       evilwm will also  read  options,  one  per  line,  from  a  file  called
+       .evilwmrc   in   the   user's   home  directory.  Options  listed  in  a
+       configuration file should omit the leading dash(es).  Options  specified
        on the command line override those found in the configuration file.
 
 USAGE
        In evilwm, the focus follows the mouse pointer, and focus is not lost if
        you stray onto the root window. The current window border is shaded gold
-       (unless it is fixed, in which case blue), with other windows left  as  a
+       (unless  it  is fixed, in which case blue), with other windows left as a
        dark grey.
 
        You can use the mouse to manipulate windows either by click/dragging the
-       single-pixel  border  (easier when they align with a screen edge), or by
+       single-pixel border (easier when they align with a screen edge),  or  by
        holding down Alt and doing so anywhere in the window. The controls are:
 
        Button 1
@@ -146,7 +147,7 @@ USAGE
        Button 3
               Lower window.
 
-       Most keyboard controls are used by holding down Control  and  Alt,  then
+       Most  keyboard  controls  are used by holding down Control and Alt, then
        pressing a key. Available functions are:
 
        Return Spawn new terminal.
@@ -156,30 +157,30 @@ USAGE
        Insert Lower current window.
 
        H, J, K, L
-              Move  window  left,  down, up or right (16 pixels). Holding Shift
+              Move window left, down, up or right (16  pixels).  Holding  Shift
               resizes the window instead.
 
        Y, U, B, N
-              Move window to the top-left, top-right,  bottom-left  or  bottom-
+              Move  window  to  the top-left, top-right, bottom-left or bottom-
               right of the current monitor.
 
        I      Show information about current window.
 
-       Equals Maximise  current  window vertically on current monitor (toggle).
+       Equals Maximise current window vertically on current  monitor  (toggle).
               Holding Shift toggles horizontal maximization.
 
        X      Maximise current window to current monitor (toggle).
 
        D      Toggle visible state of docks, eg pagers and launch bars.
 
-       If compiled with virtual  desktop  support,  these  functions  are  also
+       If  compiled  with  virtual  desktop  support,  these functions are also
        available:
 
-       F      Fix  or  unfix  current window. Fixed windows remain visible when
+       F      Fix or unfix current window. Fixed windows  remain  visible  when
               you switch virtual desktop.
 
-       1—8    Switch to specific  virtual  desktop  (internally,  desktops  are
-              numbered  from  zero,  so this actually switches to desktops 0—7;
+       1—8    Switch  to  specific  virtual  desktop  (internally, desktops are
+              numbered from zero, so this actually switches  to  desktops  0—7;
               this only becomes important if you use application matching).
 
        Left   Switch one virtual desktop to the left.
@@ -189,44 +190,44 @@ USAGE
        Up     Switch  one  virtual  desktop  up  (if  more  than  one  row  was
               specified).
 
-       Down   Switch  one  virtual  desktop  down  (if  more  than  one row was
+       Down   Switch one virtual  desktop  down  (if  more  than  one  row  was
               specified).
 
        A      Switch to the previously selected virtual desktop.
 
        In addition to the above, Alt+Tab can be used to cycle through windows.
 
-       To make evilwm reread its config, send a HUP signal to the  process.  To
+       To  make  evilwm reread its config, send a HUP signal to the process. To
        make it quit, kill it, ie send a TERM signal.
 
 FUNCTIONS
        The keyboard and mouse button controls can be configured with the --bind
-       option  to  a  number  of built-in functions. Typically, these functions
+       option to a number of built-in  functions.  Typically,  these  functions
        respond to an additional set of flags that modify their behaviour.
 
        delete Delete  a  window.  This  is  the  co-operative  way  of  closing
-              applications,  as  it  sends  the client a signal indicating that
+              applications, as it sends the client  a  signal  indicating  that
               they should shut down.
 
-       dock   When called with the  toggle  flag,  toggles  visibility  of  any
+       dock   When  called  with  the  toggle  flag,  toggles visibility of any
               window claiming to be a dock.
 
-       fix    With  the  toggle flag, toggle whether a window is fixed (visible
+       fix    With the toggle flag, toggle whether a window is  fixed  (visible
               on all virtual desktops) or not.
 
-       info   Shows extra information about the current window for as  long  as
+       info   Shows  extra  information about the current window for as long as
               the key is held.
 
-       kill   Kill  a  window. A more forceful way of closing an application if
+       kill   Kill a window. A more forceful way of closing an  application  if
               it is not responding to delete requests.
 
        lower  Lower the current window.
 
        move   When bound to a button, moves a window with the mouse.
 
-              When bound to a key, if the relative flag is specified,  moves  a
-              window  in the direction indicated by other flags: up, down, left
-              or right. Without the  relative  flag,  moves  a  window  in  the
+              When  bound  to a key, if the relative flag is specified, moves a
+              window in the direction indicated by other flags: up, down,  left
+              or  right.  Without  the  relative  flag,  moves  a window in the
               direction specified by other flag to the edge of the monitor.
 
        next   Cycle to the next window.
@@ -237,26 +238,26 @@ FUNCTIONS
 
        resize When bound to a button, resizes a window with the mouse.
 
-              When  bound to a key, if the relative flag is specified, modifies
+              When bound to a key, if the relative flag is specified,  modifies
               the width or height of the window as indicated by other flags: up
-              (reduce height), down (increase height), left (reduce  width)  or
-              right  (increase width). If instead the toggle flag is specified,
+              (reduce  height),  down (increase height), left (reduce width) or
+              right (increase width). If instead the toggle flag is  specified,
               maximises  along  axes  specified  by  other  flags:  horizontal,
               vertical or both.
 
        spawn  Start a terminal.
 
-       vdesk  With  the toggle flag specified, switch to the previously visible
-              vdesk. With the  relative  flag  set,  move  within  the  virtual
+       vdesk  With the toggle flag specified, switch to the previously  visible
+              vdesk.  With  the  relative  flag  set,  move  within the virtual
               desktop layout according to the left, right, up or down flags.
 
-              If  neither  flag  is  specified,  a numerical argument indicates
+              If neither flag is  specified,  a  numerical  argument  indicates
               which vdesk to switch to.
 
 DEFAULT BINDS
        These are the default lists of modifiers, button and keyboard binds. The
        built-in  binds  use  the  globally-configurable  modifier  combinations
-       'mask1',  'mask2' and 'altmask', making a sweeping change to a different
+       'mask1', 'mask2' and 'altmask', making a sweeping change to a  different
        modifier combination easy.
 
        Note that 'mod1' typically refers to the Alt key.
@@ -316,20 +317,20 @@ FILES
 LICENCE
        Copyright (C) 1999-2025 Ciaran Anscomb <evilwm@6809.org.uk>
 
-       This is free software. You can do what you want to it, but if it  breaks
-       something,  you  get to pay for the counselling. The code was originally
-       based on aewm, so this  is  distributed  under  the  same  terms,  which
+       This  is free software. You can do what you want to it, but if it breaks
+       something, you get to pay for the counselling. The code  was  originally
+       based  on  aewm,  so  this  is  distributed  under the same terms, which
        follow.
 
 AEWM LICENCE
        Copyright (c) 1998-2000 Decklin Foster.
 
-       THIS  SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS", WITHOUT ANY EXPRESS OR
-       IMPLIED WARRANTIES OF ANY KIND. IN NO EVENT SHALL  THE  AUTHOR  BE  HELD
+       THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS", WITHOUT ANY EXPRESS  OR
+       IMPLIED  WARRANTIES  OF  ANY  KIND. IN NO EVENT SHALL THE AUTHOR BE HELD
        LIABLE FOR ANY DAMAGES CONNECTED WITH THE USE OF THIS PROGRAM.
 
-       You  are  granted  permission  to copy, publish, distribute, and/or sell
-       copies of this program and  any  modified  versions  or  derived  works,
+       You are granted permission to copy,  publish,  distribute,  and/or  sell
+       copies  of  this  program  and  any  modified versions or derived works,
        provided that this copyright and notice are not removed or altered.
 
        Portions of the code were based on 9wm, which contains this license:
@@ -351,4 +352,4 @@ AEWM LICENCE
 SEE ALSO
        xterm (1), xprop (1)
 
-evilwm-1.4                       December 2025                        evilwm(1)
+evilwm-1.5                       December 2025                        evilwm(1)

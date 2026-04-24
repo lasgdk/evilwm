@@ -153,11 +153,19 @@ enum xconfig_result xconfig_parse_file(struct xconfig_option *options,
 		if (opt->type == XCONFIG_STR_LIST) {
 			// special case: spaces here mean something
 			arg = strtok(NULL, "\n\v\f\r");
-			while (isspace(*arg) || *arg == '=') {
+			if (arg == NULL) {
+				LOG_INFO("Ignoring option `%s' with missing argument\n", optstr);
+				continue;
+			}
+			while (*arg && (isspace((unsigned char)*arg) || *arg == '=')) {
 				arg++;
 			}
 		} else {
 			arg = strtok(NULL, "\t\n\v\f\r =");
+		}
+		if (arg == NULL) {
+			LOG_INFO("Ignoring option `%s' with missing argument\n", optstr);
+			continue;
 		}
 		set_option(opt, arg);
 	}
